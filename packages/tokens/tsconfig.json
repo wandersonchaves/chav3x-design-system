@@ -1,0 +1,6 @@
+{
+  "extends": "@chav3x-ui/ts-config/base.json",
+  "include": [
+    "src"
+  ]
+}

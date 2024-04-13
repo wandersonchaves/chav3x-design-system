@@ -1,0 +1,6 @@
+{
+  "extends": "@chav3x-ui/ts-config/react.json",
+  "include": [
+    "src"
+  ]
+}
