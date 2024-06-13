@@ -39,15 +39,13 @@ jobs:
       - name: Deploy Storybook
         working-directory: ./packages/docs
         run: |
-          npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push to gh-pages branch
-        working-directory: ./packages/docs
-        run: |
+          # Gerar os arquivos estáticos do Storybook
+          npm run build-storybook
+          # Adicionar os arquivos gerados ao Git
           git add .
+          # Commit das alterações
           git commit -m "Deploy Storybook to GitHub Pages"
-          git push --force origin main:gh-pages
+          # Push dos arquivos para a branch gh-pages
+          git push --force origin HEAD:gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
