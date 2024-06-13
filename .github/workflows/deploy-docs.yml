@@ -33,7 +33,7 @@ jobs:
         working-directory: ./packages/docs
         run: |
           git init
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git remote add origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
           git checkout -b main
 
       - name: Deploy Storybook
@@ -48,4 +48,4 @@ jobs:
           # Push dos arquivos para a branch gh-pages
           git push --force origin HEAD:gh-pages
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
