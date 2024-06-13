@@ -32,6 +32,10 @@ jobs:
 
       - name: Deploy storybook
         working-directory: ./packages/docs
-        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+        run: |
+          git init
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git checkout -b main
+          npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
