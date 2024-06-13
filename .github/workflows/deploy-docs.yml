@@ -48,4 +48,4 @@ jobs:
           # Push dos arquivos para a branch gh-pages
           git push --force origin HEAD:gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
