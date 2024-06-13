@@ -16,27 +16,38 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # cache: 'npm'
-          # cache-dependency-path: '**/package-lock.json'
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build
-        # env:
-        #   TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        #   TURBO_TEAM: chav3x
+      - name: Build project
+        run: npm run build
 
-      - run: |
+      - name: Configure Git
+        run: |
           git config --global user.name "Wanderson Chaves"
           git config --global user.email "wandersonchavesbr14@gmail.com"
           git config --global init.defaultBranch main
 
-      - name: Deploy storybook
+      - name: Initialize Git
         working-directory: ./packages/docs
         run: |
           git init
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git checkout -b main
-          npm run deploy-storybook -- --ci --existing-output-dir=storybook-static --branch main
+
+      - name: Deploy Storybook
+        working-directory: ./packages/docs
+        run: |
+          npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to gh-pages branch
+        working-directory: ./packages/docs
+        run: |
+          git add .
+          git commit -m "Deploy Storybook to GitHub Pages"
+          git push --force origin main:gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
