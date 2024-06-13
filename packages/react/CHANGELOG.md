@@ -1,10 +1,10 @@
 # @chav3x-ui/react
 
-## 2.0.0
+## 1.1.0
 
-### Major Changes
+### Minor Changes
 
-- Add display name to all components
+- Add clean code
 
 ## 1.0.1
 

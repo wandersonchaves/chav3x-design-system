@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Box, Text, TextInput, TextInputProps } from '@chav3x-ui/react'
+import {Box, Text, TextInput, TextInputProps} from '@chav3x-ui/react'
+import type {Meta, StoryObj} from '@storybook/react'
 
 export default {
   title: 'Form/Text Input',
@@ -10,7 +10,7 @@ export default {
       return (
         <Box
           as="label"
-          css={{ display: 'flex', flexDirection: 'column', gap: '$2' }}
+          css={{display: 'flex', flexDirection: 'column', gap: '$2'}}
         >
           <Text size="sm">Email address</Text>
           {Story()}

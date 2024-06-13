@@ -1,4 +1,4 @@
-# @chav3x-ui/tokens
+# @chav3x-ui/eslint-config
 
 ## 1.1.0
 

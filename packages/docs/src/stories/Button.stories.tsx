@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button, ButtonProps } from '@chav3x-ui/react'
-import { ArrowRight } from 'phosphor-react'
+import {Button, ButtonProps} from '@chav3x-ui/react'
+import type {Meta, StoryObj} from '@storybook/react'
+
+import {ArrowRight} from 'phosphor-react'
 
 export default {
   title: 'Form/Button',
@@ -29,7 +30,7 @@ export default {
         type: 'boolean',
       },
     },
-    onClick: { action: 'clicked' },
+    onClick: {action: 'clicked'},
   },
 } as Meta<ButtonProps>
 

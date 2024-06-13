@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Box, MultiStep, MultiStepProps } from '@chav3x-ui/react'
+import {Box, MultiStep, MultiStepProps} from '@chav3x-ui/react'
+import type {Meta, StoryObj} from '@storybook/react'
 
 export default {
   title: 'Form/Multi Step',
@@ -13,7 +13,7 @@ export default {
       return (
         <Box
           as="label"
-          css={{ display: 'flex', flexDirection: 'column', gap: '$2' }}
+          css={{display: 'flex', flexDirection: 'column', gap: '$2'}}
         >
           {Story()}
         </Box>

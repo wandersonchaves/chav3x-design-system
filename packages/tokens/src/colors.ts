@@ -16,5 +16,5 @@ export const colors = {
   chav3x700: '#015F43',
   chav3x900: '#00291D',
 
-  test: '#000',
+  test: '#fff',
 }
