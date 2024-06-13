@@ -26,8 +26,12 @@ jobs:
         #   TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         #   TURBO_TEAM: chav3x
 
+      - run: |
+          git config --global user.name "Wanderson Chaves"
+          git config --global user.email "wandersonchavesbr14@gmail.com"
+
       - name: Deploy storybook
         working-directory: ./packages/docs
         run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
         env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
