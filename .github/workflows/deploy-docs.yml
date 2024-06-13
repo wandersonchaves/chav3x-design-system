@@ -23,29 +23,8 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "Wanderson Chaves"
-          git config --global user.email "wandersonchavesbr14@gmail.com"
-          git config --global init.defaultBranch main
-
-      - name: Initialize Git
-        working-directory: ./packages/docs
-        run: |
-          git init
-          git remote add origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-          git checkout -b main
-
       - name: Deploy Storybook
         working-directory: ./packages/docs
-        run: |
-          # Gerar os arquivos estáticos do Storybook
-          npm run build-storybook
-          # Adicionar os arquivos gerados ao Git
-          git add .
-          # Commit das alterações
-          git commit -m "Deploy Storybook to GitHub Pages"
-          # Push dos arquivos para a branch gh-pages
-          git push --force origin HEAD:gh-pages
+        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
