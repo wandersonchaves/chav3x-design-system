@@ -1,30 +1,33 @@
-name: Deploy Storybook
+name: Deploy docs
 
 on:
   push:
     branches:
-      - main # ou a branch que você utiliza como principal
+      - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      - name: Install dependencies
-        run: npm install
+      - run: npm ci
 
-      - name: Build Storybook
-        run: npm run build-storybook
-
-      - name: Deploy Storybook to GitHub Pages
-        run: npm run deploy-storybook
+      - run: npm run build
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          TURBO_TEAM: wandersonchaves
+
+      - name: Deploy storybook
+        working-directory: ./packages/docs
+        run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
+        env:
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
