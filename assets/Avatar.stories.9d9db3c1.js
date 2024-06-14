@@ -1,0 +1,2 @@
+import{A as t}from"./index.f5fe0c35.js";import"./index.93e6f824.js";import"./iframe.7530b5c9.js";import"./extends.7e7c4687.js";import"./index.7e6e0652.js";import"./jsx-runtime.788fc795.js";const p={title:"Data display/Avatar",component:t,args:{src:"https://github.com/wandersonchaves.png",alt:"Wanderson Chaves"},argTypes:{src:{control:{type:"text"}}}},c={},n={args:{src:void 0}},m=["Primary","WithFallback"];export{c as Primary,n as WithFallback,m as __namedExportsOrder,p as default};
+//# sourceMappingURL=Avatar.stories.9d9db3c1.js.map
