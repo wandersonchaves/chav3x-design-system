@@ -1,51 +1,30 @@
-name: Deploy docs
+name: Deploy Storybook
 
 on:
   push:
     branches:
-      - main
+      - main # ou a branch que você utiliza como principal
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '16'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build project
-        run: npm run build
+      - name: Build Storybook
+        run: npm run build-storybook
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "GH Pages Bot"
-          git config --global user.email "hello@ghbot.com"
-          git config --global init.defaultBranch main
-
-      - name: Initialize Git
-        working-directory: ./packages/docs
-        run: |
-          git init
-          git remote add origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-          git checkout -b main
-
-      - name: Deploy Storybook
-        working-directory: ./packages/docs
-        run: |
-          # Gerar os arquivos estáticos do Storybook
-          npm run build-storybook
-          # Adicionar os arquivos gerados ao Git
-          git add .
-          # Commit das alterações
-          git commit -m "Deploy Storybook to GitHub Pages"
-          # Push dos arquivos para a branch gh-pages
-          git push --force origin HEAD:gh-pages
+      - name: Deploy Storybook to GitHub Pages
+        run: npm run deploy-storybook
         env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
